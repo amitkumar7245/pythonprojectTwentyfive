@@ -25,3 +25,14 @@ exclude_patterns = []
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+
+
+# -- Bing Webmaster Tools Verification Meta Tag ------------------------------
+
+def add_bing_meta(app, pagename, templatename, context, doctree):
+    context['metatags'] = context.get('metatags', '') + \
+        '<meta name="msvalidate.01" content="D145610E5122695AB55319B436B0B952" />\n'
+
+def setup(app):
+    app.add_config_value('meta_tags', '', 'html')
+    app.connect('html-page-context', add_bing_meta)
